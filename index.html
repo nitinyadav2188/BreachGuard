@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BreachGuard - Full Security Suite</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 flex flex-col min-h-screen font-sans">
+
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-md sticky top-0 z-10">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" id="logo-link" class="flex items-center gap-3 clickable-nav" data-target="home-section">
+                <svg class="h-8 w-8 text-emerald-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L4 5v6.09c0 4.94 3.58 9.35 8 10.91c4.42-1.56 8-5.97 8-10.91V5L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <h1 class="text-2xl font-bold text-gray-900 dark:text-white">BreachGuard</h1>
+            </a>
+            <nav id="main-nav" class="hidden md:flex items-center gap-2">
+                <a href="#" class="nav-link active clickable-nav" data-target="home-section">Home</a>
+                <a href="#" class="nav-link clickable-nav" data-target="password-checker-section">Password Checker</a>
+                <a href="#" class="nav-link clickable-nav" data-target="why-it-matters-section">Why It Matters</a>
+                <a href="#" class="nav-link clickable-nav" data-target="about-section">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto p-4 md:p-8 flex items-center justify-center">
+        <!-- Home Section: Breach Checker -->
+        <div id="home-section" class="w-full max-w-3xl text-center content-section">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-4 text-gray-900 dark:text-white">Find out if your data has been exposed</h2>
+            <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">
+                Enter an email address to securely check it against our **simulated** database of public data breaches.
+            </p>
+            <form id="search-form" class="flex flex-col sm:flex-row gap-2 max-w-xl mx-auto mb-8">
+                <input type="email" id="email-input" placeholder="Enter your email address" required class="flex-grow p-4 text-lg bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition">
+                <button type="submit" id="search-button" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-lg px-8 py-4 rounded-md transition-transform transform hover:scale-105">Check Now</button>
+            </form>
+            <div id="results-container" class="mt-6"></div>
+            <div class="mt-12 text-sm text-gray-500 dark:text-gray-400">
+                <p class="font-bold">This is a demonstration tool.</p>
+                <p>For a real check, please use an authoritative service like <a href="https://haveibeenpwned.com/" target="_blank" rel="noopener noreferrer" class="text-emerald-600 hover:underline">haveibeenpwned.com</a>.</p>
+            </div>
+        </div>
+
+        <!-- Password Checker Section -->
+        <div id="password-checker-section" class="w-full max-w-3xl text-center content-section hidden">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-4 text-gray-900 dark:text-white">How Strong Is Your Password?</h2>
+            <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">
+                Enter a password to analyze its strength. Nothing you type is stored or sent anywhere.
+            </p>
+            <div class="max-w-xl mx-auto text-left">
+                <input type="password" id="password-input" placeholder="Type a password to test it" class="w-full p-4 text-lg bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition">
+                <div id="password-strength-meter"><div id="password-strength-bar"></div></div>
+                <div id="password-strength-text" class="mt-2 text-lg font-bold text-center"></div>
+                <ul id="password-criteria" class="mt-4 space-y-2 text-gray-600 dark:text-gray-400">
+                    <li id="length" class="flex items-center transition-colors">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        At least 12 characters
+                    </li>
+                    <li id="lowercase" class="flex items-center transition-colors">
+                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        Contains a lowercase letter (a-z)
+                    </li>
+                    <li id="uppercase" class="flex items-center transition-colors">
+                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        Contains an uppercase letter (A-Z)
+                    </li>
+                    <li id="number" class="flex items-center transition-colors">
+                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        Contains a number (0-9)
+                    </li>
+                    <li id="special" class="flex items-center transition-colors">
+                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        Contains a special character (!@#$...)
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Why It Matters Section -->
+        <div id="why-it-matters-section" class="w-full max-w-3xl text-left content-section hidden">
+             <h2 class="text-3xl md:text-4xl font-extrabold mb-6 text-gray-900 dark:text-white text-center">Why Data Breaches Matter</h2>
+             <div class="space-y-6 text-gray-700 dark:text-gray-300">
+                <p class="text-lg">In our digital world, we entrust hundreds of services with our personal information—email addresses, passwords, phone numbers, and more. A **data breach** occurs when this sensitive information is stolen from a company's database by unauthorized individuals.</p>
+                <div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-gray-100">The Ripple Effect of a Single Breach</h3>
+                    <p>You might think a breach at one service isn't a big deal, but criminals are strategic. They know that many people reuse the same email and password across multiple websites. This is called **credential stuffing**.</p>
+                    <ul class="list-disc list-inside mt-2 pl-4 space-y-1">
+                        <li>They take the leaked email/password from Website A.</li>
+                        <li>They use automated software to try that same combination on hundreds of other popular sites (your bank, social media, email account).</li>
+                        <li>If you've reused your password, they gain instant access to your other, more valuable accounts.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-gray-100">What You Can Do About It</h3>
+                     <p>You have the power to protect yourself. Being proactive is key:</p>
+                    <ul class="list-disc list-inside mt-2 pl-4 space-y-1">
+                        <li><strong>Use Unique Passwords:</strong> Every important account should have its own strong, unique password. A password manager can help you create and store them securely.</li>
+                        <li><strong>Enable Two-Factor Authentication (2FA):</strong> This adds a crucial second layer of security, requiring a code from your phone to log in. Even if a criminal has your password, they can't get in without your device.</li>
+                        <li><strong>Stay Informed:</strong> Use tools like BreachGuard to know when your information has been exposed, so you can act quickly to change your passwords and secure your accounts.</li>
+                    </ul>
+                </div>
+             </div>
+        </div>
+
+        <!-- About Section -->
+        <div id="about-section" class="w-full max-w-3xl text-left content-section hidden">
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-6 text-gray-900 dark:text-white text-center">About BreachGuard</h2>
+            <div class="space-y-6 text-gray-700 dark:text-gray-300">
+                <p class="text-lg">BreachGuard is an educational, client-side cybersecurity tool designed to help you understand and improve your online safety without compromising your privacy.</p>
+                <div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-gray-100">Our Commitment to Privacy</h3>
+                    <p>We believe security tools should be secure themselves. That's why BreachGuard operates **entirely within your web browser**.</p>
+                    <ul class="list-disc list-inside mt-2 pl-4 space-y-1">
+                        <li><strong>Nothing is stored:</strong> The email addresses or passwords you enter are never saved, logged, or stored in any way.</li>
+                        <li><strong>Nothing is transmitted:</strong> Your data is not sent to our servers or any third party. All checks are performed locally on your device against a pre-defined, simulated list for demonstration purposes.</li>
+                        <li><strong>Open and Transparent:</strong> The complete source code for this tool is visible to you. You can right-click and "View Page Source" to see exactly how it works.</li>
+                    </ul>
+                </div>
+                 <p>Our goal is to provide a safe environment where you can learn about digital security risks and test out best practices. For real-world breach notifications, we strongly recommend using established and trusted services.</p>
+            </div>
+        </div>
+
+        <!-- Privacy Policy Section -->
+        <div id="privacy-policy-section" class="w-full max-w-3xl text-left content-section hidden">
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-6 text-gray-900 dark:text-white text-center">Privacy Policy</h2>
+            <div class="space-y-6 text-gray-700 dark:text-gray-300">
+                <p class="text-sm text-gray-500">Last Updated: August 5, 2025</p>
+                <p>BreachGuard ("we," "us," or "our") is committed to protecting your privacy. This Privacy Policy explains our principles and practices. Your use of our website and tools constitutes your agreement to this policy.</p>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-gray-100">1. No Data Collection</h3>
+                    <p>We do not collect, store, log, or share any personal information you enter into our tools. This includes, but is not limited to:</p>
+                    <ul class="list-disc list-inside mt-2 pl-4 space-y-1">
+                        <li>Email addresses entered into the breach checker.</li>
+                        <li>Passwords entered into the strength checker.</li>
+                        <li>Your IP address or browser information.</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-gray-100">2. Client-Side Operation</h3>
+                    <p>All functionality of the BreachGuard website operates entirely on your computer, within your web browser (this is "client-side"). No information is ever transmitted to our servers or any third-party service. The breach and password checks are performed against a simulated database contained within the page's code.</p>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-gray-100">3. Cookies and Trackers</h3>
+                    <p>We do not use cookies, tracking pixels, or any other analytics or advertising technologies. Your session is completely anonymous.</p>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-gray-100">4. Changes to This Policy</h3>
+                    <p>We may update this Privacy Policy in the future. Any changes will be posted on this page with an updated revision date. We encourage you to review this policy periodically.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Terms of Service Section -->
+        <div id="terms-of-service-section" class="w-full max-w-3xl text-left content-section hidden">
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-6 text-gray-900 dark:text-white text-center">Terms of Service</h2>
+            <div class="space-y-6 text-gray-700 dark:text-gray-300">
+                <p class="text-sm text-gray-500">Last Updated: August 5, 2025</p>
+                <p>By accessing and using the BreachGuard website (the "Service"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, do not use the Service.</p>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-gray-100">1. Use of Service</h3>
+                    <p>The Service is provided for educational and informational purposes only. It is a simulation designed to help users understand cybersecurity concepts. It is not intended to be a substitute for professional security advice or services.</p>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-gray-100">2. Disclaimer of Warranty</h3>
+                    <p>The Service is provided "as is" and "as available" without any warranties of any kind, express or implied. We do not warrant that the Service will be error-free, that its results will be accurate or reliable, or that it will meet your requirements.</p>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-gray-100">3. Limitation of Liability</h3>
+                    <p>In no event shall BreachGuard or its creators be liable for any direct, indirect, incidental, special, or consequential damages arising out of or in connection with your use of, or inability to use, the Service.</p>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-gray-100">4. Prohibited Conduct</h3>
+                    <p>You agree not to use the Service for any unlawful purpose or to engage in any activity that could damage, disable, or impair the Service. Attempting to reverse-engineer or interfere with the client-side code is prohibited.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 mt-auto border-t border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-4 py-6 text-center text-gray-600 dark:text-gray-400">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm">&copy; 2025 BreachGuard. All Rights Reserved.</p>
+                <div class="flex gap-4 text-sm">
+                    <a href="#" class="hover:text-emerald-600 clickable-nav" data-target="privacy-policy-section">Privacy Policy</a>
+                    <a href="#" class="hover:text-emerald-600 clickable-nav" data-target="terms-of-service-section">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JavaScript -->
+    <script src="script.js" defer></script>
+</body>
+</html>
